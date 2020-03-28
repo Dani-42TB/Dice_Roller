@@ -1,6 +1,32 @@
 import sys
 from random import *
+
+# This file is what it is, I guess I might be able to do this another way, with
+# classes maybe (??) But for now, I'm starting out and this works, and I can
+# Understand how.
+
+def toInt(In):
+    '''
+    this is so if you just write for example d20. it turns the '' in the Input
+    list, into a 1, to roll a single die. I could've done it another way maybe,
+    but getting the 'menu' with help and invalid input to work by my own was tireing,
+    so this just wokrs.
+    '''
+    if In[0] == '':
+        return str(1)
+    else:
+        return In[0]
+
 def help(In):
+    '''
+    Called when In is 'h' or 'H'
+    ----------------
+    prints: Information on what the program expects as Input.
+    ----------------
+    Input: Asks for a new input.
+    ----------------
+    returns input In.
+    '''
     print ('''
     Help: The format is, # of dice followed by
     die denomination, for example, if you want
@@ -13,11 +39,28 @@ def help(In):
     return In
 
 def invIn(In):
+    '''
+    Called when '' is entered as input.
+    Takes 1 argument In.
+    --------------------
+    prints error message
+    ---------------------
+    returns new input : In
+    '''
     print ("\n You have to input something...")
     In = input("\n Type 'h' for help, 'c' to close or your dice roll. \n > ")
     return In
 
+#This function is called when you get the right format, to initiate the roll.
 def dieRoll(roll):
+    '''
+    Takes one input List 'roll'
+    ------------------
+     Your roll input (now: In) after being processed by checkSyntax()
+    ------------------
+    returns an int :
+        your result
+    '''
     if roll[0] == '':
         numberOfDie = 1
     else:
@@ -34,6 +77,8 @@ def dieRoll(roll):
         return rollD12(numberOfDie)
     elif roll[1] == 'd20' or roll[1] == 'D20':
         return rollD20(numberOfDie)
+
+# This are all the functions for the different die.
 
 def rollD4(numberOfDie):
     '''
