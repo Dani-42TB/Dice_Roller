@@ -1,4 +1,5 @@
 import sys
+import os
 from random import *
 
 # This file is what it is, I guess I might be able to do this another way, with
@@ -27,13 +28,17 @@ def help(In):
     ----------------
     returns input In.
     '''
+    os.system('cls')
     print ('''
-    Help: The format is, # of dice followed by
-    die denomination, for example, if you want
-    to roll 3 six sided die, you would write
-    3d6, 3D6 would also work. :p
+                        Help
 
-    Supported die: d4, d6, d8, d10, d12, d20
+        To roll a die  you have to write the # of die
+    to roll followed by die denomination, for example,
+    if  you want  to roll  3 six sided die,  you would
+    write '3d6' (No air quotes), '3D6' would also work,
+    for single dice, 1d6 or d6 would both work.
+
+    Supported denominations: d4, d6, d8, d10, d12, d20
     ''')
     In = input("\n Type 'h' for help, 'c' to close or your dice roll. \n > ")
     return In
@@ -177,14 +182,13 @@ def checkSyntax(In):
 
     check = [numberOfDice, diceType]
 
-
-    if check[0] in numbers:
-        if check[0] == '':
-            if check[1] in diceTypes:
-                return check
-            else:
-                return 'error'
-        if check[1] in diceTypes:
-            return check
+    if check[0] == '':
+        check[0] = '1'
+    try:
+        check[0] = int(check[0])
+    except:
+        return 'error'
+    if check[1] in diceTypes:
+        return check
     else:
         return 'error'
